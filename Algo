@@ -63,7 +63,7 @@ class warehouse:
             self.bot = self.current_pos[:]
             self.route = []
             self.route_id = []
-            if self.target_pos[1]<self.current_pos[1]:
+            if self.current_pos[1]>self.target_pos[1]:
 
                 self.dir='rev'
                 self.coeff=-1
@@ -82,7 +82,8 @@ class warehouse:
             for r in self.route:
                 [self.route_id.append(key) for key, val in marker_ref.iteritems() if val == r]
             print self.route_id
-
+            direction([self.current_pos], self.dir)
+            scatterplot([self.current_pos], 'b')
             for kx in self.route_id:
                 while 1:
                     print kx
@@ -176,5 +177,5 @@ class warehouse:
         #############################################################################################
         print '-----------------destination reached---------------------'
 a=warehouse()
-a.followme([[0,30]],[[60,0]])
+a.followme([[0,30]],[[90,60]])
 plt.show()
