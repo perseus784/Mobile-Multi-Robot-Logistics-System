@@ -3,7 +3,7 @@ import numpy as np
 import paho.mqtt.subscribe as subscribe
 import paho.mqtt.client as mqtt
 import multiprocessing as mp
-
+import threading as mt
 host='52.90.36.67'
 #host='192.168.1.6'
 mqttc=mqtt.Client()
@@ -55,10 +55,27 @@ for ids,i in enumerate(x,1):
     marker_ref[ids]=i
 print marker_ref
 scatterplot(x,color='r')
-
+r1 = []
+r2 = []
+r3 = []
 class warehouse:
+
     def __init__(self,name):
         self.name=name
+
+        self.y1 = []
+        self.x1 = []
+        self.y2 = []
+        self.overall = []
+        if self.name == 'bot1':
+            self.objsel = 1
+            self.color='b'
+        elif self.name == 'bot2':
+            self.objsel = 2
+            self.color='r'
+        elif self.name == 'bot3':
+            self.objsel = 3
+            self.color='g'
 
     def logger(self,val):
         mqttc.publish("log", val, 2)
@@ -78,21 +95,36 @@ class warehouse:
         self.ax = str(t)
         client.disconnect()
 
+    def movement(self,route_id,axis,coeff):
+        self.route_id=route_id
+        self.axis=axis
+        self.coeff=coeff
+        for kx in self.route_id:
+            while 1:
 
-    def followme(self,current_pos, target_pos):
+                print "giving marker to rpi", kx
+                mqttc.publish("rpi{}".format(self.objsel), kx, 2)
+
+                subscribe.callback(self.on_message, "cps{}".format(self.objsel), hostname=host)
+                print "found marker by rpi"
+                # self.flag = input('give')
+                self.flag = self.ax
+                if self.flag == str(kx):
+                    self.current_pos[self.axis] = self.current_pos[self.axis] + self.coeff * spacing
+                    direction([self.current_pos], self.dir)
+                    scatterplot([self.current_pos], self.color)
+                    break
+
+    def routecalc(self,current_pos, target_pos):
+        global r1, r2, r3
         self.current_pos=current_pos[0]
         self.target_pos=target_pos[0]
         median = stop / 2
 
-        if self.name == 'bot1':
-            self.objsel = 1
-        elif self.name =='bot2':
-            self.objsel = 2
-        elif self.name == 'bot3':
-            self.objsel =3
 
-        ####################################################################################
+        ###################################################################################
         if self.current_pos[1] in [ylim_down , ylim_up]:
+            self.coy1=1
             pass
         else:
             self.bot = self.current_pos[:]
@@ -108,7 +140,7 @@ class warehouse:
                 self.coeff=1
                 self.x_reach=[self.current_pos[0],ylim_up]
             self.xnodes = abs((self.x_reach[1] - self.current_pos[1]) / spacing)
-
+            self.coy1=self.coeff
             while self.xnodes > 0:
                 self.bot[1] += self.coeff*30
                 self.route.append(self.bot[:])
@@ -116,30 +148,14 @@ class warehouse:
 
             for r in self.route:
                 [self.route_id.append(key) for key, val in marker_ref.iteritems() if val == r]
-            print self.route_id
             direction([self.current_pos], self.dir)
-            scatterplot([self.current_pos], 'b')
+            scatterplot([self.current_pos], self.color)
+            self.y1=self.route_id[:]
+            self.current_pos=self.bot[:]
+        ###################################################################################
 
-            for kx in self.route_id:
-                while 1:
-
-                    print "giving marker to rpi", kx
-                    mqttc.publish("rpi{}".format(self.objsel), kx, 2)
-
-                    subscribe.callback(self.on_message, "cps{}".format(self.objsel), hostname=host)
-                    print "found marker by rpi"
-                    #self.flag = input('give')
-                    self.flag = self.ax
-                    if self.flag == str(kx):
-                        self.current_pos[1] = self.current_pos[1] + self.coeff*spacing
-                        direction([self.current_pos], self.dir)
-                        scatterplot([self.current_pos], 'b')
-                        break
-        print '------------x_ref reached-------------'
-        print 'im at',self.current_pos
-
-        #############################################################################
         if self.current_pos[0]==self.target_pos[0]:
+            self.cox1=1
             pass
         else:
 
@@ -152,6 +168,7 @@ class warehouse:
                 self.coeff = 1
             self.y_reach = [self.target_pos[0], self.current_pos[1]]
             self.ynodes = abs((self.y_reach[0] - self.current_pos[0]) / spacing)
+            self.cox1=self.coeff
 
             self.bot = self.current_pos[:]
             self.route = []
@@ -164,28 +181,13 @@ class warehouse:
 
             for r in self.route:
                 [self.route_id.append(key) for key, val in marker_ref.iteritems() if val == r]
-            print self.route_id
-
-            for kx in self.route_id:
-                while 1:
-                    print "giving marker to rpi", kx
-                    mqttc.publish("rpi{}".format(self.objsel), kx, 2)
-
-                    subscribe.callback(self.on_message, "cps{}".format(self.objsel), hostname=host)
-                    print "found marker by rpi"
-                    # self.flag = input('give')
-                    self.flag = self.ax
-                    if self.flag == str(kx):
-                        self.current_pos[0] = self.current_pos[0] + self.coeff * spacing
-                        direction([self.current_pos], self.dir)
-                        scatterplot([self.current_pos], 'b')
-                        break
-
-        print '-----------y_ref reached------------'
-        print 'im at', self.current_pos
-
+            direction([self.current_pos], self.dir)
+            scatterplot([self.current_pos], self.color)
+            self.x1 = self.route_id[:]
+            self.current_pos = self.bot[:]
         ###################################################################################
         if self.current_pos[1]==self.target_pos[1]:
+            self.coy2=1
             pass
         else:
             self.bot = self.current_pos[:]
@@ -198,8 +200,10 @@ class warehouse:
             else:
                 self.dir='fwd'
                 self.coeff=1
+
             self.x_reach=[self.current_pos[0],self.target_pos[1]]
             self.xnodes1 = abs((self.x_reach[1] - self.current_pos[1]) / spacing)
+            self.coy2=self.coeff
 
             while self.xnodes1 > 0:
                 self.bot[1] += self.coeff*spacing
@@ -208,35 +212,54 @@ class warehouse:
 
             for r in self.route:
                 [self.route_id.append(key) for key, val in marker_ref.iteritems() if val == r]
-            print self.route_id
+            direction([self.current_pos], self.dir)
+            scatterplot([self.current_pos], self.color)
+            self.y2 = self.route_id[:]
+            self.current_pos = self.bot[:]
 
-            for kx in self.route_id:
-                while 1:
-                    print "giving marker to rpi", kx
-                    mqttc.publish("rpi{}".format(self.objsel), kx, 2)
 
-                    subscribe.callback(self.on_message, "cps{}".format(self.objsel), hostname=host)
-                    print "found marker by rpi"
-                    # self.flag = input('give')
-                    self.flag = self.ax
-                    if self.flag == str(kx):
-                        self.current_pos[1] = self.current_pos[1] + self.coeff*spacing
-                        direction([self.current_pos], self.dir)
-                        scatterplot([self.current_pos], 'b')
-                        break
-            print 'im at', self.current_pos
-            print '--------------Pos reached--------------'
-        #############################################################################################
+        ####################################################################################
+        if self.objsel==1:
+            r1=self.y1+self.x1+self.y2
+
+        elif self.objsel==2:
+            r2=self.y1+self.x1+self.y2
+
+        elif self.objsel==3:
+            r3=self.y1+self.x1+self.y2
+
+        print 'routes are',r1,r2,r3
+
+    def inter(self):
+        self.movement(self.y1, 1, self.coy1)
+        print '-------------------xref reched--------------------------'
+
+        self.movement(self.x1, 0, self.cox1)
+        print '-------------------yref reched--------------------------'
+
+        self.movement(self.y2, 1, self.coy2)
         print '-----------------destination reached---------------------'
+
 
 
 bot1=warehouse('bot1')
 bot2=warehouse('bot2')
 bot3=warehouse('bot3')
-if __name__=="__main__":
 
-    a=mp.Process(target=bot1.followme,args=([[0,30]],[[90,60]]))
-    b=mp.Process(target=bot2.followme,args=([[30,0]],[[60,30]]))
+if __name__=="__main__":
+    bot1.routecalc([[0,30]],[[90,60]])
+    bot2.routecalc([[30,0]],[[60,30]])
+    bot3.routecalc([[30, 60]], [[90, 30]])
+    print "calculated route for all three"
+
+    '''           COLLISION LOGIC          '''
+    
+    a=mt.Thread(target=bot1.inter)
+    b=mt.Thread(target=bot2.inter)
+    c=mt.Thread(target=bot3.inter)
     a.start()
     b.start()
+    c.start()
+
+
 
