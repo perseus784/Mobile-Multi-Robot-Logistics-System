@@ -232,13 +232,13 @@ class warehouse:
 
     def inter(self):
         self.movement(self.y1, 1, self.coy1)
-        print '-------------------xref reched--------------------------'
+        print '-------xref reched------'
 
         self.movement(self.x1, 0, self.cox1)
-        print '-------------------yref reched--------------------------'
+        print '------yref reched-------'
 
         self.movement(self.y2, 1, self.coy2)
-        print '-----------------destination reached---------------------'
+        print '~~~~~~~~~~~~~~~~~~~~~~~~~~{} destination reached~~~~~~~~~~~~~~~~~~~~~~~~~~'.format(self.name)
 
 
 
@@ -253,7 +253,7 @@ if __name__=="__main__":
     print "calculated route for all three"
 
     '''           COLLISION LOGIC          '''
-    
+
     a=mt.Thread(target=bot1.inter)
     b=mt.Thread(target=bot2.inter)
     c=mt.Thread(target=bot3.inter)
