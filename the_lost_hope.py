@@ -34,13 +34,13 @@ def plot_line(pt1,pt2,color='r'):
     pass
 
 class cal:
-    def __init__(self,grid,marker_ref,occupied):
+    def __init__(self,grid,marker_ref):
         self.marker_ref=marker_ref
         self.grid=grid
-        self.occupied = occupied
+
 
         pass
-    def addis(self,point,coeff=30):
+    def addis(self,point,coeff,occ):
         temp = []
         temp.append([point[0]+coeff,point[1]])
         temp.append([point[0] - coeff,point[1]])
@@ -50,72 +50,39 @@ class cal:
         for ik in temp:
             if not ik in self.grid:
                 temp.remove(ik)
-            #elif i in  self.occupied:temp.remove(i)
+            if ik in occ:
+
+                temp.remove(ik)
         return temp
 
-
-
-    def cotoid(self,point):
-        for key, val in self.marker_ref.items():
+    def cotoid(self,point,dic):
+        for key, val in dic.items():
             if val == point:
                 return (key)
 
     def distcost(self,pt1,des):
         return (abs(des[0]-pt1[0])+abs(des[1]-pt1[1]))
 
-    def routecalc(self,start,desto):
+    def routecalc(self,start,desto,occupied):
         self.route=[]
         self.current=start
         self.dest=desto
         self.cost_dict={}
-        for ti,to in self.marker_ref.items():
-            self.cost_dict[ti]=10000
+        self.route.append(self.cotoid(start,self.marker_ref))
+        print 'occu',occupied
 
-        pathlis=self.addis(self.current,30)
-        self.cost_dict[self.cotoid(self.current)]=0
+        while self.current != self.dest:
 
-        for ij in pathlis:
-            self.cost_dict[self.cotoid(ij)]=self.distcost(ij,self.dest)
+            pathlis = self.addis(self.current, 30,occupied)
 
-        print self.cost_dict
+            for ij in pathlis:
+                self.cost_dict[self.cotoid(ij, self.marker_ref)] = self.distcost(ij, self.dest)
 
-        for ia,ie in self.cost_dict.iteritems():
-            print ie
-            if ie != 10000:
-
-                pathlis = self.addis(self.marker_ref[ia])
-                print pathlis
-                for ij in pathlis:
-                    dist=self.distcost(ij, self.dest)
-
-                    if self.cost_dict[self.cotoid(ij)]==10000:
-                            self.cost_dict[self.cotoid(ij)] = dist
-                    else: self.cost_dict[self.cotoid(ij)] += dist
-
-        print self.cost_dict
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            too = min([v for k, v in self.cost_dict.items()])
+            parent = self.cotoid(too, self.cost_dict)
+            self.route.append(parent)
+            self.current = self.marker_ref[parent]
         return self.route
-
-
-
-
-
 
 
 
@@ -132,7 +99,13 @@ scatterplot(x,color='r')
 
 print '----------------------------------------------'
 
-c=cal(x,marker_ref,occupied=0)
-c.routecalc(start=[60,0],desto=[90,60])
+c=cal(x,marker_ref)
+r1= c.routecalc(start=[60,0],desto=[0,60],occupied=[])
+print r1
+blocks=[marker_ref[i] for i in r1][1:]
+print blocks
+c1=cal(x,marker_ref)
+r2=c.routecalc(start=[60,0],desto=[90,60],occupied=blocks)
+print r1,r2
 
 plt.show()
