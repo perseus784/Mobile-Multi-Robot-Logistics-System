@@ -33,9 +33,96 @@ def plot_line(pt1,pt2,color='r'):
     plt.plot([pt1[0], pt2[0]], [pt1[1], pt2[1]],color)
     pass
 
+class cal:
+    def __init__(self,grid,marker_ref,occupied):
+        self.marker_ref=marker_ref
+        self.grid=grid
+        self.occupied = occupied
+
+        pass
+    def addis(self,point,coeff=30):
+        temp = []
+        temp.append([point[0]+coeff,point[1]])
+        temp.append([point[0] - coeff,point[1]])
+        temp.append([point[0],point[1] + coeff])
+        temp.append([point[0],point[1] - coeff])
+
+        for ik in temp:
+            if not ik in self.grid:
+                temp.remove(ik)
+            #elif i in  self.occupied:temp.remove(i)
+        return temp
+
+
+
+    def cotoid(self,point):
+        for key, val in self.marker_ref.items():
+            if val == point:
+                return (key)
+
+    def distcost(self,pt1,des):
+        return (abs(des[0]-pt1[0])+abs(des[1]-pt1[1]))
+
+    def routecalc(self,start,desto):
+        self.route=[]
+        self.current=start
+        self.dest=desto
+        self.cost_dict={}
+        for ti,to in self.marker_ref.items():
+            self.cost_dict[ti]=10000
+
+        pathlis=self.addis(self.current,30)
+        self.cost_dict[self.cotoid(self.current)]=0
+
+        for ij in pathlis:
+            self.cost_dict[self.cotoid(ij)]=self.distcost(ij,self.dest)
+
+        print self.cost_dict
+
+        for ia,ie in self.cost_dict.iteritems():
+            print ie
+            if ie != 10000:
+
+                pathlis = self.addis(self.marker_ref[ia])
+                print pathlis
+                for ij in pathlis:
+                    dist=self.distcost(ij, self.dest)
+
+                    if self.cost_dict[self.cotoid(ij)]==10000:
+                            self.cost_dict[self.cotoid(ij)] = dist
+                    else: self.cost_dict[self.cotoid(ij)] += dist
+
+        print self.cost_dict
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        return self.route
+
+
+
+
+
+
+
+
 #generate nodes
 x=[[j,i] for j in range(start,stop,spacing) for i in range(start,stop,spacing)]
 print x
+
 #generate Ids
 marker_ref={}
 for ids,i in enumerate(x,1):
@@ -45,5 +132,7 @@ scatterplot(x,color='r')
 
 print '----------------------------------------------'
 
+c=cal(x,marker_ref,occupied=0)
+c.routecalc(start=[60,0],desto=[90,60])
 
 plt.show()
