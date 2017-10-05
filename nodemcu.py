@@ -10,6 +10,7 @@ import time
 sta_if = network.WLAN(network.STA_IF)
 sta_if.connect('NETGEAR74', '87654321')
 sta_if.active()
+time.sleep(2)
 sta_if.ifconfig()
 subs_temp = ''
 
@@ -71,12 +72,12 @@ def rfidtonode(rfid):
             ard.write(str(count))
             break
         count += 1
-    return count
+    return count-1
 
 
 def action(ids, dire, flag):
     time.sleep(2)
-    logger('@rasp reached the function {}'.format(str(dire)))
+    logger('@rasp reached the function {}'.format(dire))
 
     while flag:
         # checking for the rfid input
@@ -89,8 +90,28 @@ def action(ids, dire, flag):
         node = rfidtonode(line)
         time.sleep(2)
         logger('@rasp found node {}'.format(node))
+
+        '''logic'''
+        count=3
+        if dire== "u'":
+            ard.write(str(count))
+            time.sleep(2)
+            ard.write(str(count))
+            time.sleep(2)
+
+            ard.write(str(count))
+            time.sleep(2)
+
+            ard.write(str(count))
+            time.sleep(2)
+
+            ard.write(str(count))
+            time.sleep(2)
+
+            ard.write(str(count))
+
         flag = False
-        
+
     pass
 
 
