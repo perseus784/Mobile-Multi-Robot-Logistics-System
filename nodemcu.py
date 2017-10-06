@@ -8,7 +8,7 @@ import time
 
 # network establishment
 sta_if = network.WLAN(network.STA_IF)
-sta_if.connect('NETGEAR74', '87654321')
+sta_if.connect('routerme', '12345678')
 sta_if.active()
 time.sleep(2)
 sta_if.ifconfig()
@@ -41,7 +41,7 @@ c = MQTTClient("umqtt_client", CONFIG['MQTT_BROKER'])
 c.connect()
 
 
-def publish(message):
+def publ(message):
     c.publish('cps1', message)
 
 
@@ -93,23 +93,17 @@ def action(ids, dire, flag):
 
         '''logic'''
         count=3
+        if dire=="s'":
+            pass
+
         if dire== "u'":
             ard.write(str(count))
-            time.sleep(2)
-            ard.write(str(count))
-            time.sleep(2)
-
-            ard.write(str(count))
-            time.sleep(2)
-
-            ard.write(str(count))
-            time.sleep(2)
-
-            ard.write(str(count))
-            time.sleep(2)
-
-            ard.write(str(count))
-
+        if dire=="d'":
+            pass
+        if dire=="f'":
+            pass
+        if dire=="r'":
+            pass
         flag = False
 
     pass
@@ -126,8 +120,6 @@ if __name__ == '__main__':
     client.subscribe(b'rpi1')
     time.sleep(2)
 
-    logger('subscription over')
-    time.sleep(2)
     while 1:
         client.wait_msg()
         logger(subs_temp)
@@ -135,5 +127,7 @@ if __name__ == '__main__':
         time.sleep(2)
         logger('@rasp received marker {} from cps'.format(ids))
         action(ids=ids, dire=dire, flag=True)
+        logger('@rasp operation done')
+        publ(ids)
 
     c.disconnect()
