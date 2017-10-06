@@ -63,47 +63,88 @@ def decoder(ctx):
     return lis[0], lis[-1]
 
 
-def rfidtonode(rfid):
-    count = 0
-    logger('@rasp {}'.format(rfid))
-    for ide in ide_lis:
+def striper(x):
+    a = x.split("'")
+    return a
 
-        if rfid == str(ide):
-            ard.write(str(count))
+def rfidtonode(rfid):
+    count = 1
+
+    for idr in ide_lis:
+
+        if str(rfid) == str(idr):
             break
         count += 1
-    return count-1
+
+    return count
+
+def rfid_func(ide):
+    while 1:
+        line = rfid.read()
+
+        if line:
+
+            ard.write('5')
+            node = rfidtonode(line)
+            if str(node)==str(ide):
+                #time.sleep(2)
+                #logger('@rasp FOUND MARKER'.format(node))
+                break
+            ard.write('1')
+    pass
+
 
 
 def action(ids, dire, flag):
-    time.sleep(2)
-    logger('@rasp reached the function {}'.format(dire))
+    di=str(striper(dire)[0])
+    idu=str(striper(ids)[1])
+    #logger('@rasp ...')
 
     while flag:
+
         # checking for the rfid input
-        while 1:
-            line = rfid.read()
-            if line:
-                logger('@rasp READ MARKER ID')
-                break
-
-        node = rfidtonode(line)
-        time.sleep(2)
-        logger('@rasp found node {}'.format(node))
-
         '''logic'''
-        count=3
-        if dire=="s'":
-            pass
+        if di=="s":
+            ard.write('5')
+            logger('@rasp reached destination')
+            break
 
-        if dire== "u'":
-            ard.write(str(count))
-        if dire=="d'":
-            pass
-        if dire=="f'":
-            pass
-        if dire=="r'":
-            pass
+        if di== "u":
+            time.sleep(2)
+            logger('@rasp FORWARD')
+            ard.write("1")
+            rfid_func(idu)
+            break
+
+        if di=="d":
+            #time.sleep(2)
+            #logger('@rasp BACK')
+            ard.write("2")
+            time.sleep(3)
+            ard.write("2")
+            time.sleep(3)
+            ard.write("1")
+            rfid_func(idu)
+            break
+
+        if di=="l":
+
+            #time.sleep(2)
+            #logger('@rasp LEFT')
+            ard.write("2")
+            time.sleep(3)
+            ard.write("1")
+            rfid_func(idu)
+            break
+            
+        if di=="r":
+            #time.sleep(2)
+            #logger('@rasp RIGHT')
+            ard.write("3")
+            time.sleep(3)
+            ard.write("1")
+            rfid_func(idu)
+            break
         flag = False
 
     pass
@@ -118,16 +159,21 @@ if __name__ == '__main__':
     client.connect()
     client.set_callback(onMessage)
     client.subscribe(b'rpi1')
-    time.sleep(2)
 
     while 1:
+        time.sleep(2)
         client.wait_msg()
         logger(subs_temp)
         ids, dire = decoder(str(subs_temp))
-        time.sleep(2)
-        logger('@rasp received marker {} from cps'.format(ids))
+
         action(ids=ids, dire=dire, flag=True)
+        
+        ard.write('5')
+        
+        time.sleep(2)
         logger('@rasp operation done')
+        
+        time.sleep(2)
         publ(ids)
 
     c.disconnect()
