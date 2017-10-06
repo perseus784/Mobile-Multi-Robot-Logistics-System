@@ -120,9 +120,9 @@ def action(ids, dire, flag):
             #time.sleep(2)
             #logger('@rasp BACK')
             ard.write("2")
-            time.sleep(3)
+            time.sleep(4)
             ard.write("2")
-            time.sleep(3)
+            time.sleep(4)
             ard.write("1")
             rfid_func(idu)
             break
@@ -132,7 +132,7 @@ def action(ids, dire, flag):
             #time.sleep(2)
             #logger('@rasp LEFT')
             ard.write("2")
-            time.sleep(3)
+            time.sleep(4)
             ard.write("1")
             rfid_func(idu)
             break
@@ -141,7 +141,7 @@ def action(ids, dire, flag):
             #time.sleep(2)
             #logger('@rasp RIGHT')
             ard.write("3")
-            time.sleep(3)
+            time.sleep(4)
             ard.write("1")
             rfid_func(idu)
             break
@@ -167,8 +167,6 @@ if __name__ == '__main__':
         ids, dire = decoder(str(subs_temp))
 
         action(ids=ids, dire=dire, flag=True)
-        
-        ard.write('5')
         
         time.sleep(2)
         logger('@rasp operation done')
