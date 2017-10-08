@@ -3,7 +3,6 @@ import numpy as np
 import paho.mqtt.subscribe as subscribe
 import paho.mqtt.client as mqtt
 import multiprocessing as mp
-import threading as mt
 import heapq
 import csv, ast
 import time
@@ -363,7 +362,7 @@ if __name__ == "__main__":
             all_routes.append(routes)
             [wall.append(tuple(rou[0])) for rou in routes]
             idm = [[[obj.cotoid(list(i[0]), marker_ref), i[1]] for i in routes]]
-            thread.append(mt.Thread(target=obj.movement, args=idm))
+            thread.append(mp.Process(target=obj.movement, args=idm))
 
         logger('@cps assigned threads')
         print '--------------------------------'
