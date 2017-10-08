@@ -43,7 +43,7 @@ c.connect()
 
 
 def publ(message):
-    c.publish('cps2', message)
+    c.publish('cps1', message)
 
 
 def onMessage(topic, msg):
@@ -68,6 +68,7 @@ def striper(x):
     a = x.split("'")
     return a
 
+
 def rfidtonode(rfid):
     count = 1
 
@@ -79,6 +80,7 @@ def rfidtonode(rfid):
 
     return count
 
+
 def rfid_func(ide):
     while 1:
         line = rfid.read()
@@ -87,93 +89,102 @@ def rfid_func(ide):
 
             ard.write('5')
             node = rfidtonode(line)
-            if str(node)==str(ide):
-                #time.sleep(2)
-                #logger('@rasp FOUND MARKER'.format(node))
+            if str(node) == str(ide):
+                time.sleep(2)
+                logger('@rasp FOUND MARKER'.format(node))
                 break
             ard.write('1')
     pass
 
 
-prev_dir=''
+prev_dir = ''
+
+
 def action(ids, dire, flag):
+
     global prev_dir
-    di=str(striper(dire)[0])
-    idu=str(striper(ids)[1])
-    #logger('@rasp ...')+
+    di = str(striper(dire)[0])
+    idu = str(striper(ids)[1])
+    logger('@rasp ...{}'.format(idu))
 
     while flag:
 
         # checking for the rfid input
         '''logic'''
-        if di=="s":
+        if di == 's':
             ard.write(str('5'))
             logger('@rasp reached destination')
-            prev_dir=di
             break
 
-        if di== "u":
+        if di == 'u':
             time.sleep(2)
             logger('@rasp FORWARD')
-            if prev_dir==di:
+            if prev_dir == di:
                 ard.write("1")
                 rfid_func(idu)
-            elif prev_dir=='l':
-                ard.write("3")
-                time.sleep(4)
-                rfid_func(idu)
-                prev_dir='u'
-            elif prev_dir=='r':
-                ard.write("2")
-                time.sleep(4)                
-                rfid_func(idu)
-                prev_dir='u'
-                                
-            break
 
-        if di=="d":
-            #time.sleep(2)
-            #logger('@rasp BACK')
-            if prev_dir==di:
-                ard.write("1")
-                rfid_func(idu)
-            else:
-                ard.write("2")
-                time.sleep(4)
-                ard.write("2")
-                time.sleep(4)
-                ard.write("1")
-                rfid_func(idu)
-                prev_dir=di
-            break
-
-        if di=="l":
-
-            #time.sleep(2)
-            #logger('@rasp LEFT')
-            if prev_dir==di:
-                ard.write("1")
-                rfid_func(idu)
-            else:
-                ard.write("2")
-                time.sleep(4)
-                ard.write("1")
-                rfid_func(idu)
-                prev_dir=di
-            break
-
-        if di=="r":
-            #time.sleep(2)
-            #logger('@rasp RIGHT')
-            if prev_dir==di:
-                ard.write("1")
-                rfid_func(idu)
-            else:
+            elif prev_dir == 'l':
+                time.sleep(2)
+                logger('@rasp reorienting RIGHT')
                 ard.write("3")
                 time.sleep(4)
                 ard.write("1")
                 rfid_func(idu)
-                prev_dir=di
+                prev_dir = 'u'
+
+            elif prev_dir == 'r':
+                logger('@rasp reorienting LEFT')
+                ard.write("2")
+                time.sleep(4)
+                ard.write("1")
+                rfid_func(idu)
+                prev_dir = 'u'
+
+            break
+
+        if di == "d":
+            time.sleep(2)
+            logger('@rasp BACK')
+            if prev_dir == di:
+                ard.write("1")
+                rfid_func(idu)
+            else:
+                ard.write("2")
+                time.sleep(4)
+                ard.write("2")
+                time.sleep(4)
+                ard.write("1")
+                rfid_func(idu)
+                prev_dir = di
+            break
+
+        if di == "l":
+
+            time.sleep(2)
+            logger('@rasp LEFT')
+            if prev_dir == di:
+                ard.write("1")
+                rfid_func(idu)
+            else:
+                ard.write("2")
+                time.sleep(4)
+                ard.write("1")
+                rfid_func(idu)
+                prev_dir = di
+            break
+
+        if di == "r":
+            time.sleep(2)
+            logger('@rasp RIGHT')
+            if prev_dir == di:
+                ard.write("1")
+                rfid_func(idu)
+            else:
+                ard.write("3")
+                time.sleep(4)
+                ard.write("1")
+                rfid_func(idu)
+                prev_dir = di
             break
         flag = False
 
@@ -188,8 +199,8 @@ if __name__ == '__main__':
 
     client.connect()
     client.set_callback(onMessage)
-    client.subscribe(b'rpi2')
-
+    client.subscribe(b'rpi1')
+    prev_dir='u'
     while 1:
         time.sleep(2)
         client.wait_msg()
@@ -199,7 +210,7 @@ if __name__ == '__main__':
         action(ids=ids, dire=dire, flag=True)
 
         ard.write('5')
-        
+
         time.sleep(2)
         publ(ids)
 
