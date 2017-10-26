@@ -1,0 +1,65 @@
+This is an RFID based localisation and navigational system for multiple mobile robots within a given environment.
+
+Localization is done for the workspace using the nodes with RFID tags and black strips of lines were used for assisting 
+the navigation across the arena.
+The robot basically consists of two controllers:ie primary  controller with a NodeMCU and a  secondary  controller with 
+an Arduino Mega for motion control 	
+Primary controller deals with the commands sending and receival with the CPS(Central Processing 
+System) and secondary controller.In other terms it could be defined as the brain  of the system
+Secondary controller deals with the basic motion across the grids.It consists of LSA 08 advanced line sensor and the MPU 6050 IMU which asssists its motion through the environment
+Communication between primary and secondary controllers happens through serial communication
+Communication between primary controller and the CPS (Central Processing System) happens across MQTT
+
+Create circuit connections as mentioned below.The attached images are just for reference,USE THE FOLLOWING CONNECTION ONLY
+
+Arduino Mega-IMU 6050
+
+Arduino	IMU   6050
+VCC	          VCC
+GND       	  GND
+SCL       	  SCL
+SDA       	  SDA
+18(int 5)	    INT 
+
+
+Arduino Mega-LSA 08
+
+Arduino Mega	LSA 08
+0	            RX pin 1
+1	            TX pin 2
+2	            digital pin 3
+4             digital pin 5
+GND	          GND
+VCC(12 V)    	VCC
+
+
+Arduino Mega-NodeMCU Serial Communication
+
+Arduino Mega	Node MCU
+VCC	          VCC
+GND         	GND
+RX3      	    TXD1 (GPIO 2) D4
+
+
+
+Node MCU- EM 18 RFID card reader
+
+NodeMCU	      EM 18 Card Reader
+GPIO3(RXD0)  	TX
+GND	          GND
+
+
+
+Arduino Mega-Motor Driver
+
+Arduino Mega	Motor Driver board
+5	            IN1   (Driver 1)
+6           	IN2  (Driver 1)
+7           	IN3  (Driver 1)
+8	            IN4 (Driver 1)
+9	            IN1  (Driver 2)
+10          	IN2  (Driver 2)
+11          	IN3  (Driver 2)
+12          	IN4  (Driver 2)
+
+
