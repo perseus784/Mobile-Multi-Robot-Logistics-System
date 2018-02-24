@@ -1,3 +1,3 @@
 # README #
 
-Multiproceesing, Multithreading , warehouse algorithm, multiple robot control, two bots
+Multiprocessing, Multithreading , warehouse algorithm, multiple robot control, two bots
