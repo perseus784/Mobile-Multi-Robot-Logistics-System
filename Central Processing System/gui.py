@@ -74,21 +74,21 @@ class Ui_Form(object):
     
     def message1(self):
         self.items += 'coffee|'
-        print "Coffee"
+        print ("Coffee")
         #mqttc.publish("gui","coffee",2)
     def message2(self):
         self.items += 'tea|'
-        print "Tea"
+        print ("Tea")
         #mqttc.publish("gui","tea",2)
     def message3(self):
         self.items += 'snacks|'
-        print "Snacks"
+        print ("Snacks")
         #mqttc.publish("gui","snacks",2)
         
     def submit(self):
         print self.items
         #self.items = '|'.join(items)
-        print "Items: ", self.items
+        print ("Items: ", self.items)
         mqttc.publish("gui",self.items,2)
         self.items=''
 
