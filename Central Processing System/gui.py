@@ -1,13 +1,13 @@
 from PyQt4 import QtCore, QtGui
-import paho.mqtt.client as mqtt
+#import paho.mqtt.client as mqtt
 import sys
 import numpy
-
+'''
 host='52.90.36.67' 
 
 mqttc=mqtt.Client()
 mqttc.connect(host,1883,60)
-mqttc.loop_start()
+mqttc.loop_start()'''
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -114,5 +114,6 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
+'''
     mqttc.loop_stop()
-    mqttc.disconnect()
+    mqttc.disconnect()'''
