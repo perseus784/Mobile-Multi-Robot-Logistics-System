@@ -1,13 +1,14 @@
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 import paho.mqtt.client as mqtt
 import sys
 import numpy
-
+'''
 host='52.90.36.67' 
 
 mqttc=mqtt.Client()
 mqttc.connect(host,1883,60)
-mqttc.loop_start()
+mqttc.loop_start()'''
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -86,10 +87,10 @@ class Ui_Form(object):
         #mqttc.publish("gui","snacks",2)
         
     def submit(self):
-        print self.items
+        print (self.items)
         #self.items = '|'.join(items)
         print ("Items: ", self.items)
-        mqttc.publish("gui",self.items,2)
+        #mqttc.publish("gui",self.items,2)
         self.items=''
 
     def retranslateUi(self, Form):
@@ -114,5 +115,4 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
-    mqttc.loop_stop()
-    mqttc.disconnect()
+
