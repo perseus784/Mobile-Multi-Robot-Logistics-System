@@ -1,1 +1,4 @@
 Media\*
+.idea\*
+*.gsheet
+*.MOV
