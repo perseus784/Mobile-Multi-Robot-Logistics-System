@@ -1,11 +1,25 @@
 About:
 It is a warehouse management system. The system contains Multiple robots and one central processing system for it to control it. Each robot is comprised of two parts. One is the arduino controller for the robot and the NodeMCU intermediate. Each of it's fucntions are explained below.
 
+
 Setup: Since it is a warehouse project, we need to put a layout of grid. The grid is layed out by using any normal tape(black). Before laying it out, a rfid tag is put in a proper form where the robot needs to stop. These places are called spots. These spots have something which will be picked up by the robot and deliver it to the other point of the warehouse.
 
 Initially, we were trying to use aruco markers for localizing the robots in the spots. Due to the complexities involved in that and Hardware required a camera for it, so called it out and replaced localising mechanism with Rfid tags. which are easy and more efficent and doesn't need a camera
 
 Requirements and specifications: robot specs
+
+
+Connections and Circuit diagrams:
+
+Software reqs:
+
+Architecture:
+
+
+Execution:
+
+FUTURE PLANS:
+
 
 High level algorithm Arduino robot Nodemcu interface
 
@@ -31,60 +45,6 @@ System) and secondary controller.In other terms it could be defined as the brain
 Secondary controller deals with the basic motion across the grids.It consists of LSA 08 advanced line sensor and the MPU 6050 IMU which asssists its motion through the environment
 Communication between primary and secondary controllers happens through serial communication.
 Communication between primary controller and the CPS (Central Processing System) happens across MQTT.
-
-Create circuit connections as mentioned below.The attached images are just for reference,USE THE FOLLOWING CONNECTION ONLY
-
-Arduino Mega-IMU 6050
-
-Arduino	IMU   6050
-VCC	          VCC
-GND       	  GND
-SCL       	  SCL
-SDA       	  SDA
-18(int 5)	    INT 
-
-
-Arduino Mega-LSA 08
-
-Arduino Mega	LSA 08
-0	            RX pin 1
-1	            TX pin 2
-2	            digital pin 3
-4             digital pin 5
-GND	          GND
-VCC(12 V)    	VCC
-
-
-Arduino Mega-NodeMCU Serial Communication
-
-Arduino Mega	Node MCU
-VCC	          VCC
-GND         	GND
-RX3      	    TXD1 (GPIO 2) D4
-
-
-
-Node MCU- EM 18 RFID card reader
-
-NodeMCU	      EM 18 Card Reader
-GPIO3(RXD0)  	TX
-GND	          GND
-
-
-
-Arduino Mega-Motor Driver
-
-
-Arduino Mega	Motor Driver board
-5	            IN1   (Driver 1)
-6           	IN2  (Driver 1)
-7           	IN3  (Driver 1)
-8	            IN4 (Driver 1)
-9	            IN1  (Driver 2)
-10          	IN2  (Driver 2)
-11          	IN3  (Driver 2)
-12          	IN4  (Driver 2)
-
 
 from notes:
 gui:
@@ -158,7 +118,5 @@ Battery level monitoring system for each robot, which could be the first step fo
 
 Need to design/develop  a system for lifting or carrying the loads across the environment. 
 
-
-Connections and Cirtuit diagrams:
 
 
