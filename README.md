@@ -86,3 +86,79 @@ Arduino Mega	Motor Driver board
 12          	IN4  (Driver 2)
 
 
+from notes:
+gui:
+Run the gui program for selecting the items that is required.
+
+CPS:
+
+run the cps program to cps.py 
+
+Functions:
+- receive items from gui via mqtt
+- convert items to markerids
+- populate the grid by calculating the spaces
+- locate the markerid in the grid
+- get coordinates of the marker id in grid
+- now first move horizontally till you reach the x coordinate
+- move vertically till you reach the y coordinate
+- repeat the same for going to other positions too
+
+Things to be added:
+multithreading control of multiple robots using the same cps
+
+Nodemcu:
+
+Nodemcu will receive the next marker id to be found and
+ once the marker id is found, it will inform the cps that It has reached
+the marker id. now cps will agan give the next marker for which the robot moves
+
+Things to be added:
+Perfect navigation for special cases by testing in differnt positions of the bot.
+
+rajmohan:
+
+Overview
+
+The proposed system consists of three mobile robots for the warehouse management.
+
+Localization is done for the workspace using the nodes with RFID tags and black strips of lines were used for assisting the navigation across the arena.
+
+The robot basically consists of two controllers:ie primary  controller with a NodeMCU and a  secondary  controller with an Arduino Mega for motion control 	
+
+Primary controller deals with the commands sending and receival with the CPS(Central Processing 
+System) and secondary controller.In other terms it could be defined as the brain  of the system
+
+Secondary controller deals with the basic motion across the grids.It consists of LSA 08 advanced line sensor and the MPU 6050 IMU which asssists its motion through the environment
+
+Communication between primary and secondary controllers happens through serial communication
+
+Communication between primary controller and the CPS (Central Processing System) happens across MQTT
+
+
+Progress so far
+
+Designed and developed three mobile robots with LSA 08 line sensor,EM 18 RFID reader and MPU 6050 IMU ,which could be controlled by commands across MQTT.
+
+Developed an ArUco based frame work for controlling the motion of the robot between two different points.
+
+Changing the ArUco based framework to the RFID based one for controlling the motion of the robot from points A to B ,B to C.(for a single robot ONLY)
+
+
+Future Plans
+
+Need to develop an algorithmic architecture with the following functionalities:
+•	Path planning  with obstacle avoidance ,which is scalable for n-robots
+•	Multiple robots could be controlled independently  simultaneously
+•	Each robot should be able to move from A->B->C
+	
+Integrating dynamic obstacle detection with the existing robots and necessary modifications in the algorithm
+
+Battery level monitoring system for each robot, which could be the first step for the auto charge docking
+
+Need to design/develop  a system for lifting or carrying the loads across the environment. 
+
+
+Connections and Cirtuit diagrams:
+
+
