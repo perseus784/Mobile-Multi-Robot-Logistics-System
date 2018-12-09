@@ -1,6 +1,6 @@
 # Overview: 
 
-<img align="center" src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move1.gif">
+<img align="center" src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move1.gif" width=880 height=500>
 
 It is a warehouse management system. The system contains Multiple robots and one central processing system for it to control it. Each robot is comprised of two parts. One is the arduino controller for the robot and the NodeMCU intermediate. Each of it's fucntions are explained below.
 
@@ -11,7 +11,7 @@ Design Consideraion:
 
 Initially, we were trying to use aruco markers for localizing the robots in the spots. Due to the complexities involved in that and Hardware required a camera for it, so called it out and replaced localising mechanism with Rfid tags. which are easy and more efficent and doesn't need a camera
 
-Requirements and specifications: 
+## Requirements and specifications: 
 <img align="right" src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/IMG_2766.JPG" width= 400 height=300>
 
 robot specs
@@ -25,22 +25,22 @@ robot specs
 
 ## Connections and Circuit diagrams: 
 
-**Arduino and Motor driver**
+### Arduino and Motor driver
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_L298N.jpg" width=600 height=400>
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/motordriver.png" width=200 height=400>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/motordriver.png" width=290 height=300>
 </p>
 
-**Arduino and IMU**
+### Arduino and IMU
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_MPU6050.jpg" width=600 height=400>
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/imu.png" width=200 height=400>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/imu.png" width=290 height=300>
 </p>
 
-**Arduino and NodeMCU**
+### Arduino and NodeMCU
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_NodeMCU.png" width=600 height=400>
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/nodemcu.png" width=200 height=400>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/nodemcu.png" width=290 height=300>
 </p>
 
 <p align="left">
@@ -48,24 +48,24 @@ robot specs
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/rfidreader.png" width=400 height=300>
 </P>
 
-Software reqs:
+## Software reqs:
 
-Architecture:
+## Architecture:
 
 <p align="center">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/architecture.png" width=800 height=700>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/architecture.png" width=700 height=650>
 </p>
 
-Workflow:
+## Workflow:
 <p align="center">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/workflow.png" width=800 height=800>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/workflow.png" width=650 height=650>
 </p>
 
-Execution:
+## Execution:
 Path palnning:
 
 <p align="center">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/IMG_2583.JPG" width=800 height=400>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/IMG_2583.JPG" width=880 height=400>
 </p>
 
 <p align="left">
@@ -74,23 +74,24 @@ Path palnning:
 
 </p>
 
-GUI DSELECTION:
+## GUI:
 <p align="center">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/gui.png" width=800 height=600>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/gui.png" width=880 height=500>
 
 </p>
 
-Working:
+## Working:
 <p align="center">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move2.gif" width=800 height=600>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move2.gif" width=880 height=500>
 
 </p>
 
 <p align="center">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move3.gif" width=800 height=600>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move3.gif" width=880 height=500>
 
-</p>
-FUTURE PLANS:
+</p> 
+
+## FUTURE PLANS:
 
 
 High level algorithm Arduino robot Nodemcu interface
