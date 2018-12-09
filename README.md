@@ -2,14 +2,18 @@
 
 <img align="center" src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move1.gif" width=890 height=500>
 
-It is a warehouse management system. The system contains Multiple robots and one central processing system for it to control it. Each robot is comprised of two parts. One is the arduino controller for the robot and the NodeMCU intermediate. Each of it's fucntions are explained below.
+* It is a warehouse management system. The system contains Multiple robots and one Central Processing System to control it. Each robot is comprised of two parts. One is the arduino controller for the robot and the NodeMCU intermediate.
 
-Designed and developed three mobile robots with LSA 08 line sensor,EM 18 RFID reader and MPU 6050 IMU ,which could be controlled by commands across MQTT.
+* Designed and developed three mobile robots with LSA 08 line sensor,EM 18 RFID reader and MPU 6050 IMU, which could be controlled by commands across MQTT.
 
-The proposed system consists of three mobile robots for the warehouse management.
-This is an RFID based localisation and navigational system for multiple mobile robots within a given environment
+* The proposed system consists of three mobile robots for the warehouse management.
+* This is an RFID based localisation and navigational system for multiple mobile robots within a given environment
 
-Localization is done for the workspace using the nodes with RFID tags and black strips of lines were used for assisting the navigation across the arena.
+* Localization is done for the workspace using the nodes with RFID tags and black strips of lines were used for assisting the navigation across the arena.
+* 
+
+* 
+
 
 ## Requirements and specifications: 
 <img align="right" src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/IMG_2766.JPG" width= 400 height=300>
@@ -27,14 +31,22 @@ Localization is done for the workspace using the nodes with RFID tags and black 
 
 # Design Consideraion (Very Important):
 
-Initially, we were trying to use aruco markers for localizing the robots in the spots. Due to the complexities involved in that and Hardware required a camera for it, so called it out and replaced localising mechanism with Rfid tags. which are easy and more efficent and doesn't need a camera
-Setup: Since it is a warehouse project, we need to put a layout of grid. The grid is layed out by using any normal tape(black). Before laying it out, a rfid tag is put in a proper form where the robot needs to stop. These places are called spots. These spots have something which will be picked up by the robot and deliver it to the other point of the warehouse.
+A lot of literature survey and search went in this section.
+A lot of factors were considered such as financial, reliable, available, flexible, modular aspects.
+software considerations
+python usable extensible
+
+Initially, we were trying to use aruco markers for localizing the robots in the spots. Due to the complexities involved in that and Hardware required a camera for it, so called it out and replaced localising mechanism with Rfid tags. which are easy and more efficent and doesn't need a camera 
+
 
 Developed an ArUco based frame work for controlling the motion of the robot between two different points.
 
 Changing the ArUco based framework to the RFID based one for controlling the motion of the robot from points A to B ,B to C.(for a single robot ONLY) 
  A node is a crosssection of two paths. The sensors that we used can identify all different colors. So, can work wide variety of range. the main thing is that using this sensor, it was very easy to find the line even in low lights. 
 
+
+**Setup:** 
+Since it is a warehouse project, we need to put a layout of grid. The grid is layed out by using any normal tape(black). Before laying it out, a RFID tag is put in a proper form where the robot needs to stop in the cross section of the grid. These spots have something which will be picked up by the robot and deliver it to the other point of the warehouse.
 
 ## Connections and Circuit diagrams: 
 The circuit diagrams for the compoenents are given below. The respective tables shows the pin connections between the componenets.
