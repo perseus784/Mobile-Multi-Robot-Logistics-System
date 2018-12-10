@@ -141,6 +141,7 @@ The following setup is considered as the arena and the system is based on this,
 </p>
 
 
+
 ### NodeMCU Functions:
 
 * NodeMCU facilitates the algorithm and the Arduino in the robot to talk to each other.
