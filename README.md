@@ -83,7 +83,7 @@ The circuit diagrams for the compoenents are given below. The respective tables 
 * The below diagram gives the overall architecture of the system, 
 
 <p align="center">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/architecture.png" width=800 height=650>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/architecture.png" width=800 height=700>
 </p>
 
 
