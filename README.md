@@ -5,11 +5,11 @@
 The proposed project is a Mutli Robot Warehouse Management System. It involved working on variety of concepts and gave us a in-depth knowledge in both hardware and software aspects. The entire system is modular and constructed with serious scope for future modifications.
 
 ## Key Features:
-* The robots navigate their way using grid path lines which is sensed by the highly accurate light sensing sensor-> **LSA 08**.
+* The robots navigate their way using grid path lines which is sensed by the highly accurate light sensing sensor -> **LSA 08**.
 
 * Each robot is comprised of two parts, One is the **Arduino MEGA** controller for the robot and the **NodeMCU** intermediate.
 
-* Localisation of the robots are done using RFID tags layed under the intersections of the grid which is read by RFID reader-> **EM 18 RFID reader**.
+* Localisation of the robots are done using RFID tags layed under the intersections of the grid which is read by RFID reader -> **EM 18 RFID reader**.
 
 * Inertial Measure Unit for stabilty and control -> **MPU 6050 IMU**.
 
