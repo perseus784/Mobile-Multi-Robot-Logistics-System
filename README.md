@@ -2,17 +2,22 @@
 
 <img align="center" src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move1.gif" width=890 height=500>
 
-* It is a warehouse management system. The system contains Multiple robots and one Central Processing System to control it. Each robot is comprised of two parts. One is the arduino controller for the robot and the NodeMCU intermediate.
+The proposed project is a Mutli Robot Warehouse Management System. It involved us working on variety of concepts and gave a in-depth knowledge in both hardware and software aspects. The entire system is completly modular and constructed with serious scope for future modifications.
 
-* Designed and developed three mobile robots with LSA 08 line sensor,EM 18 RFID reader and MPU 6050 IMU, which could be controlled by commands across MQTT.
+## Key Features:
+* The robots navigate their way using grid path lines which is sensed by the highly accurate light sensing sensor-> **LSA 08**.
 
-* The proposed system consists of three mobile robots for the warehouse management.
-* This is an RFID based localisation and navigational system for multiple mobile robots within a given environment
+* Each robot is comprised of two parts, One is the **Arduino MEGA** controller for the robot and the **NodeMCU** intermediate.
 
-* Localization is done for the workspace using the nodes with RFID tags and black strips of lines were used for assisting the navigation across the arena.
-* 
+* Localisation of the robots are done using RFID tags layed under the intersections of the grid which is read by RFID reader-> **EM 18 RFID reader**.
 
-* 
+* Inertial Measure Unit for stabilty and control -> **MPU 6050 IMU**.
+
+* A* is used for Dynamic path planning even with obstacles and multiple robots.
+
+* Communication is based entirely on **MQTT**.
+
+* Robots are **Stateless**, which means even if the robots malfucntioned or disturbed, CPS can reboot the robot and continue its job without hiderance.
 
 
 ## Requirements and specifications: 
@@ -122,7 +127,7 @@ Run the gui program for selecting the items that is required.
 
 ### Path palnning: 
 
-* **(A*)** algorithm is used to calculate the path and using this can give us dynamic path planning with obstacles.
+* A* algorithm is used to calculate the path and using this can give us dynamic path planning with obstacles.
 * It calculates the shortest possible path and also avoids the path which was already taken by another robot. 
 The following setup is considered as the arena and the system is based on this,
 
