@@ -51,9 +51,10 @@ The circuit diagrams for the compoenents are given below. The respective tables 
 
 ### Arduino and Motor driver
 <br>
+
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_L298N.jpg" width=600 height=400>
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/motordriver.png" width=290 height=300>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/motordriver.png" width=250 height=300>
 </p>
 <br>
 
@@ -62,7 +63,7 @@ The circuit diagrams for the compoenents are given below. The respective tables 
 
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_MPU6050.jpg" width=600 height=400>
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/imu.png" width=290 height=300>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/imu.png" width=250 height=300>
 </p>
 <br>
 
@@ -71,7 +72,7 @@ The circuit diagrams for the compoenents are given below. The respective tables 
 
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_NodeMCU.png" width=600 height=400>
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/nodemcu.png" width=290 height=300>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/nodemcu.png" width=250 height=300>
 </p>
 
 <br>
@@ -136,8 +137,8 @@ The following setup is considered as the arena and the system is based on this,
 </p>
 
 <p align="left">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/IMG_2686.JPG" width=440 height=300>
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/IMG_2689.JPG" width=440 height=300>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/IMG_2686.JPG" width=430 height=300>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/IMG_2689.JPG" width=430 height=300>
 </p>
 
 
