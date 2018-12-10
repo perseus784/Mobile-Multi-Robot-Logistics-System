@@ -29,54 +29,54 @@
 * Miscellaneous items like dotted PCB, Bread Board, Switches, Wheels, Acrylic Base, Wires.
 * A Computer with Ubuntu or Windows capable of running Python.
 
-# Design Consideraion (Very Important):
+# Design Consideraion:
 
-A lot of literature survey and search went in this section.
-A lot of factors were considered such as financial, reliable, available, flexible, modular aspects.
-software considerations
-python usable extensible
+* A lot of literature survey and study went in this section to design it in every aspect like cost efficient, reliable, extensible and modular aspects.
+* The whole system is very modular in both Hardware and Software level, it is made that way so that it can experimented with differented things.
+* Python is used as the chief software for CPS. Python provides easy prototying and extensibility.
+* Path planning was initially done using custom simple algorithm and then we moved to A* algorithm for dynamic path planning with obstacles.
+* Initially, we were trying to use aruco markers for localizing the robots in the spots. Due to the complexities involved in that and Hardware required a camera for it, so called it out and replaced localising mechanism with Rfid tags. which are easy and more efficent and doesn't need a camera.
+* At first, we designed it for only one robot but later on we added multiple robots which can work side by side and CPS can give them commands simultaneously.
 
-Initially, we were trying to use aruco markers for localizing the robots in the spots. Due to the complexities involved in that and Hardware required a camera for it, so called it out and replaced localising mechanism with Rfid tags. which are easy and more efficent and doesn't need a camera 
-
-
-Developed an ArUco based frame work for controlling the motion of the robot between two different points.
-
-Changing the ArUco based framework to the RFID based one for controlling the motion of the robot from points A to B ,B to C.(for a single robot ONLY) 
- A node is a crosssection of two paths. The sensors that we used can identify all different colors. So, can work wide variety of range. the main thing is that using this sensor, it was very easy to find the line even in low lights. 
-
-
-**Setup:** 
+## Setup: 
 Since it is a warehouse project, we need to put a layout of grid. The grid is layed out by using any normal tape(black). Before laying it out, a RFID tag is put in a proper form where the robot needs to stop in the cross section of the grid. These spots have something which will be picked up by the robot and deliver it to the other point of the warehouse.
 
 ## Connections and Circuit diagrams: 
 The circuit diagrams for the compoenents are given below. The respective tables shows the pin connections between the componenets.
 
 ### Arduino and Motor driver
+<br>
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_L298N.jpg" width=600 height=400>
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/motordriver.png" width=290 height=300>
 </p>
+<br>
 
 ### Arduino and IMU
+<br>
+
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_MPU6050.jpg" width=600 height=400>
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/imu.png" width=290 height=300>
 </p>
+<br>
 
 ### Arduino and NodeMCU
+<br>
+
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_NodeMCU.png" width=600 height=400>
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/nodemcu.png" width=290 height=300>
 </p>
 
+<br>
 <p align="left">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/lsa.png" width=400 height=400>
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/rfidreader.png" width=400 height=300>
 </P>
 
-## Software reqs:
+## Architecture: 
 
-## Architecture:
 * The Architecture gives the system flexibility and modularity.
 * For example, if in future, Localization method is changed to something else, it can be easily replaced since it is modular and does not require a overall change in the architecture.
 * The communication between each section is through MQTT. 
@@ -95,19 +95,20 @@ The circuit diagrams for the compoenents are given below. The respective tables 
 * A brief circle of operations is given below,
 
 <p align="center">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/workflow.png" width=650 height=650>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/workflow.png" width=750 height=750>
 </p>
 
 ## Working:
 
-**GUI:**
+### GUI: 
+
 Run the gui program for selecting the items that is required.
 
 <p align="center">
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/gui.png" width=880 height=500>
 </p> 
 
-**CPS Functions:**
+### CPS Functions:
 
 * receive items from gui via mqtt
 * convert items to markerids
@@ -119,7 +120,7 @@ Run the gui program for selecting the items that is required.
 * give instructions to the respective robot one node at a time. Once acknowledged that it reached the Node, then give the next node to the robot.
  
 
-**Path palnning:** 
+### Path palnning: 
 
 * **(A*)** algorithm is used to calculate the path and using this can give us dynamic path planning with obstacles.
 * It calculates the shortest possible path and also avoids the path which was already taken by another robot. 
@@ -135,14 +136,14 @@ The following setup is considered as the arena and the system is based on this,
 </p>
 
 
-**NodeMCU Functions:** 
+### NodeMCU Functions:
 
 * NodeMCU facilitates the algorithm and the Arduino in the robot to talk to each other.
 * Nodemcu will receive the next marker id to be found and it will keep moving checking the RFID tags on the way.
 * Once the marker id is found, it will inform the cps that it has reached the marker id. 
 * The event is logged and the NodeMCU waits for the next command from CPS.
 
-**Localisation:** 
+### Localisation: 
 
 * After trying various localisation methods, we first decided to localize the robots with ARUCO markers. But the problem with ARUCO markers are it requires a vision system, means it requires a camera and a raspberry pi to run it.
 * Another problem with ARUCO markers are they need to sticked in a certain way requires a very rigid rack also it suffers in low light condiations.
@@ -151,7 +152,7 @@ The following setup is considered as the arena and the system is based on this,
 * Each RFID tag is cross referenced to a grid co-ordinate and that file is stored in memory.
 * This method can work even in no light conditions and it is much more robust than the ARUCO markers.
 
-**Arduino MEGA:**
+### Arduino MEGA:
 
  * Communication NodeMCU and Arduino happens through serial communication.
  * The arduino in the robot listens to very particular set of commands and it executes it systematically.
@@ -177,8 +178,8 @@ Robot navigating it's way when another robot is present in the same grid,
 
 ## Future Plans:
 
-* Each robot should be able to move from A->B->C
+* Adding functionality to move from the destination point to the next destination point without coming to Home point. 
 
-* Battery level monitoring system for each robot, which could be the first step for the auto charge docking
+* Battery level monitoring system for each robot, which could be the first step for the auto charge docking.
 
-* Need to design/develop  a system for lifting or carrying the loads across the environment. 
+* Design/ Develop a system for lifting or carrying the loads across the environment. 
