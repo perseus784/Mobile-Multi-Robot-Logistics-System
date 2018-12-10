@@ -2,7 +2,7 @@
 
 <img align="center" src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/grid_move1.gif" width=890 height=500>
 
-The proposed project is a Mutli Robot Warehouse Management System. It involved us working on variety of concepts and gave a in-depth knowledge in both hardware and software aspects. The entire system is completly modular and constructed with serious scope for future modifications.
+The proposed project is a Mutli Robot Warehouse Management System. It involved working on variety of concepts and gave us a in-depth knowledge in both hardware and software aspects. The entire system is modular and constructed with serious scope for future modifications.
 
 ## Key Features:
 * The robots navigate their way using grid path lines which is sensed by the highly accurate light sensing sensor-> **LSA 08**.
