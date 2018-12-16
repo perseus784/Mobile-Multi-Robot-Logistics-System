@@ -9,7 +9,7 @@ The proposed project is a Mutli Robot Warehouse Management System. It involved w
 
 * Each robot is comprised of two parts, One is the **Arduino MEGA** controller for the robot and the **NodeMCU** intermediate.
 
-* Localisation of the robots are done using RFID tags layed under the intersections of the grid which is read by RFID reader -> **EM 18 RFID reader**.
+* Localisation of the robots are done using RFID tags layed under the intersections of the grid which is read by a RFID reader -> **EM 18 RFID reader**.
 
 * Inertial Measure Unit for stabilty and control -> **MPU 6050 IMU**.
 
@@ -37,10 +37,10 @@ The proposed project is a Mutli Robot Warehouse Management System. It involved w
 # Design Consideraion:
 
 * A lot of literature survey and study went in this section to design it in every aspect like cost efficient, reliable, extensible and modular aspects.
-* The whole system is very modular in both Hardware and Software level, it is made that way so that it can experimented with differented things.
-* Python is used as the chief software for CPS. Python provides easy prototying and extensibility.
+* The whole system is very modular in both Hardware and Software level, it is made that way so that it is easy to experiment. 
+* The CPS is predominantly written in Python. Python provides easy prototyping and extensibility.
 * Path planning was initially done using custom simple algorithm and then we moved to A* algorithm for dynamic path planning with obstacles.
-* Initially, we were trying to use aruco markers for localizing the robots in the spots. Due to the complexities involved in that and Hardware required a camera for it, so called it out and replaced localising mechanism with Rfid tags. which are easy and more efficent and doesn't need a camera.
+* Initially, we were trying to use aruco markers for localizing the robots in the spots. Due to the complexities involved in that and Hardware required a camera for it, so called it out and replaced localising mechanism with RFID tags. which are easy and more efficent and doesn't need a camera.
 * At first, we designed it for only one robot but later on we added multiple robots which can work side by side and CPS can give them commands simultaneously.
 
 ## Setup: 
@@ -153,8 +153,8 @@ The following setup is considered as the arena and the system is based on this,
 ### Localisation: 
 
 * After trying various localisation methods, we first decided to localize the robots with ARUCO markers. But the problem with ARUCO markers are it requires a vision system, means it requires a camera and a raspberry pi to run it.
-* Another problem with ARUCO markers are they need to sticked in a certain way requires a very rigid rack also it suffers in low light condiations.
-* After all these drawbacks we decided replace the localisation with RFID readers.
+* Another problem with ARUCO markers are they need to stuck in a certain way requires a very rigid rack also it suffers in low light condiations.
+* Given these drawbacks we decided replace the localisation with RFID readers.
 * We used EM18 RFID readers attached at the bottom of the robot and placed the RFID tags at the intersection of the grid lines.
 * Each RFID tag is cross referenced to a grid co-ordinate and that file is stored in memory.
 * This method can work even in no light conditions and it is much more robust than the ARUCO markers.
