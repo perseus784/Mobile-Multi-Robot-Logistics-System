@@ -53,7 +53,7 @@ The circuit diagrams for the compoenents are given below. The respective tables 
 <br>
 
 <p align="left">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_L298N.jpg" width=600 height=400>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_L298N.jpg" width=550 height=400>
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/motordriver.png" width=250 height=300>
 </p>
 <br>
@@ -62,7 +62,7 @@ The circuit diagrams for the compoenents are given below. The respective tables 
 <br>
 
 <p align="left">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_MPU6050.jpg" width=600 height=400>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_MPU6050.jpg" width=550 height=400>
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/imu.png" width=250 height=300>
 </p>
 <br>
@@ -71,7 +71,7 @@ The circuit diagrams for the compoenents are given below. The respective tables 
 <br>
 
 <p align="left">
-<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_NodeMCU.png" width=600 height=400>
+<img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/Arduino_NodeMCU.png" width=550 height=400>
 <img src="https://github.com/perseus784/Mobile-Multi-Robot-Logistics-System/blob/master/Media/nodemcu.png" width=250 height=300>
 </p>
 
